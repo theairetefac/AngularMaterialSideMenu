@@ -1,0 +1,48 @@
+﻿@use 'theme/colors';
+@use 'theme/typography';
+
+.mat-sidenav-container {
+  flex-grow: 1;
+  background-color: inherit;
+  color: inherit;
+}
+
+.mat-sidenav {
+  padding: 12px;
+  border: none;
+  background-color: colors.surface();
+  color: colors.on-surface-variant();
+}
+.mat-nav-list {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.mat-mdc-list-item {
+  height: 56px !important;
+  padding-inline: 16px !important;
+  border-radius: 28px;
+
+  .mat-mdc-list-item-unscoped-content {
+    @include typography.label-large;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    color: inherit;
+  }
+
+  &.mat-mdc-list-item-active {
+    background-color: colors.secondary-container();
+    color: colors.on-secondary-container();
+    --symbol-fill: 1;
+  }
+
+  &.mat-mdc-list-item-interactive::before {
+    background-color: currentColor;
+  }
+
+  &.mat-mdc-list-item-interactive:not(:focus):not(.mdc-list-item--disabled):hover::before {
+    opacity: .08;
+  }
+}

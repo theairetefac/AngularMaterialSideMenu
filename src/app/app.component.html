@@ -1,0 +1,20 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav #sidenav id="sidenav" mode="side" opened>
+    <div [@onSideNavChange]="isMenuOpened ? 'open' : 'close'">
+      <mat-nav-list>
+        <div class="menu-toggle-button">
+          <mat-icon (click)="toggleSidenav()">menu</mat-icon>
+        </div>
+        <a mat-list-item *ngFor="let page of pages" routerLink="{{page?.link}}"
+          routerLinkActive="mat-mdc-list-item-active"
+          [routerLinkActiveOptions]="{exact:true}">
+          <mat-icon>{{page?.icon}}</mat-icon>
+          <span [@animateText]="isTextVisible ? 'show' : 'hide'">{{ page?.name }}</span>
+        </a>
+      </mat-nav-list>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content class="content" [@onMainContentChange]="isMenuOpened ? 'open': 'close'">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
