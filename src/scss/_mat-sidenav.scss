@@ -1,5 +1,5 @@
-﻿@use 'theme/colors';
-@use 'theme/typography';
+﻿@use "theme/colors";
+@use "theme/typography";
 
 .mat-sidenav-container {
   flex-grow: 1;
@@ -42,7 +42,22 @@
     background-color: currentColor;
   }
 
-  &.mat-mdc-list-item-interactive:not(:focus):not(.mdc-list-item--disabled):hover::before {
-    opacity: .08;
+  &.mat-mdc-list-item-interactive:not(:focus):not(
+      .mdc-list-item--disabled
+    ):hover::before {
+    opacity: 0.08;
   }
+}
+
+.sidenav-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.mat-mdc-action-list {
+  display: flex !important;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: flex-end;
 }

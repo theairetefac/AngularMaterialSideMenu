@@ -1,20 +1,26 @@
 <mat-sidenav-container fullscreen>
-  <mat-sidenav #sidenav id="sidenav" mode="side" opened>
-    <div [@onSideNavChange]="isMenuOpened ? 'open' : 'close'">
+  <mat-sidenav #sidenav id="sidenav" mode="side" [opened]="authService.isAuthorized">
+    <div class="sidenav-inner" [@onSideNavChange]="isMenuOpened ? 'open' : 'close'">
+      <div class="menu-toggle-button">
+        <mat-icon (click)="toggleSidenav()">menu</mat-icon>
+      </div>
       <mat-nav-list>
-        <div class="menu-toggle-button">
-          <mat-icon (click)="toggleSidenav()">menu</mat-icon>
-        </div>
         <a mat-list-item *ngFor="let page of pages" routerLink="{{page?.link}}"
-          routerLinkActive="mat-mdc-list-item-active"
-          [routerLinkActiveOptions]="{exact:true}">
+          routerLinkActive="mat-mdc-list-item-active" [routerLinkActiveOptions]="{exact:true}">
           <mat-icon>{{page?.icon}}</mat-icon>
           <span [@animateText]="isTextVisible ? 'show' : 'hide'">{{ page?.name }}</span>
         </a>
       </mat-nav-list>
+      <mat-action-list>
+        <mat-list-item (click)="authService.logout()">
+          <mat-icon>logout</mat-icon>
+          <span [@animateText]="isTextVisible ? 'show' : 'hide'">Выйти</span>
+        </mat-list-item>
+      </mat-action-list>
     </div>
   </mat-sidenav>
-  <mat-sidenav-content class="content" [@onMainContentChange]="isMenuOpened ? 'open': 'close'">
+  <mat-sidenav-content class="content"
+    [@onMainContentChange]="!authService.isAuthorized ? 'full' : isMenuOpened ? 'open': 'close'">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

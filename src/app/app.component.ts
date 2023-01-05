@@ -4,6 +4,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { onMainContentChange, onSideNavChange, animateText } from './animations';
+import {AuthService} from "./auth/auth.service";
 
 interface IMenuLink {
   link: string;
@@ -34,7 +35,7 @@ export class AppComponent {
     );
 
     
-  constructor( private matIconRegistry: MatIconRegistry, private breakpointObserver: BreakpointObserver ) {
+  constructor( private matIconRegistry: MatIconRegistry, private breakpointObserver: BreakpointObserver, public authService: AuthService  ) {
     this.matIconRegistry.setDefaultFontSetClass('material-symbols-rounded');
     
     this.isHandset.subscribe(isHandset => {
