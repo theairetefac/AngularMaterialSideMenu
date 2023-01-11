@@ -1,0 +1,29 @@
+<h1 class="mat-headline-large">Книги</h1>
+
+<div class="list books">
+  <div class="element" *ngFor="let book of bookService.getList() | async">
+    <div class="text">
+      <div class="headline mat-body-large">{{ book.name }}</div>
+      <div class="supporting-text mat-body-medium">{{ book.author | author }}</div>
+    </div>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="editBook(book)">
+        <mat-icon>edit</mat-icon>
+        <span>Редактировать</span>
+      </button>
+      <!-- <button mat-menu-item disabled> -->
+      <button mat-menu-item (click)="deleteBook(book)">
+        <mat-icon>delete</mat-icon>
+        <span>Удалить</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>
+
+<button mat-raised-button color='primary' (click)="addBook()" class="add-button">
+  Добавить
+  <mat-icon>add</mat-icon>
+</button>

@@ -3,7 +3,7 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { onMainContentChange, onSideNavChange, animateText } from './animations';
+import { onMainContentChange, onSideNavChange } from './animations';
 import {AuthService} from "./auth/auth.service";
 
 interface IMenuLink {
@@ -16,7 +16,7 @@ interface IMenuLink {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [onMainContentChange, onSideNavChange, animateText]
+  animations: [onMainContentChange, onSideNavChange]
 })
 export class AppComponent {
 
@@ -27,6 +27,7 @@ export class AppComponent {
     { name: 'Страница 2', link: 'page-2', icon: 'inbox' },
     { name: 'Страница 3', link: 'page-3', icon: 'star' },
     { name: 'Страница 4', link: 'page-4', icon: 'send' },
+    { name: 'Книги', link: 'books', icon: 'book' },
   ]
   public isHandset: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

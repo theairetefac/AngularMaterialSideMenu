@@ -26,10 +26,14 @@
   .mat-mdc-list-item-unscoped-content {
     @include typography.label-large;
     display: flex;
-    flex-direction: row;
     gap: 12px;
+    flex-direction: row;
     align-items: center;
     color: inherit;
+
+    .mat-icon {
+      flex: 0 0 24px;
+    }
   }
 
   &.mat-mdc-list-item-active {

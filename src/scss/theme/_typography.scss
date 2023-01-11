@@ -66,3 +66,19 @@
 @mixin title-small{
   @include apply(title-small);
 }
+
+.mat-headline-large {
+  @include headline-large;
+}
+
+.mat-headline-small {
+  @include headline-small;
+}
+
+.mat-body-large {
+  @include body-large;
+}
+
+.mat-body-medium {
+  @include body-large;
+}

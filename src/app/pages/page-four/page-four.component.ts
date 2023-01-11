@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'app-page-four',
-  templateUrl: './page-four.component.html',
-  styleUrls: ['./page-four.component.css']
+  templateUrl: './page-four.component.html'
 })
-export class PageFourComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class PageFourComponent {
+  @HostBinding('class') @Input('class') classList: string = 'container full-width';
 }

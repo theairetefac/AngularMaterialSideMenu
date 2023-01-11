@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostBinding, Input} from '@angular/core';
 import {AuthService} from "../auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginModel} from "../models/login.model";
@@ -8,7 +8,10 @@ import {LoginModel} from "../models/login.model";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent {
+
+  @HostBinding('class') @Input('class') classList: string = 'container full-width';
 
   public loginForm = new FormGroup({
     email: new FormControl('', [

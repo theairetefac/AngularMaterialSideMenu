@@ -33,6 +33,11 @@ const routes: Routes = [
     path: 'page-4',
     component: PageFourComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'books',
+    loadChildren: () => import('./pages/books/books.module').then(m => m.BooksModule),
+    canActivate: [AuthGuard]
   }
 ];
 
