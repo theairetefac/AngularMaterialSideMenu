@@ -1,7 +1,7 @@
-import {Component, HostBinding, Input} from '@angular/core';
-import {AuthService} from "../auth.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {LoginModel} from "../models/login.model";
+import { Component, HostBinding, Input } from '@angular/core';
+import { AuthService } from "../auth.service";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { LoginModel } from "../models/login.model";
 
 @Component({
   selector: 'app-login',
@@ -37,10 +37,10 @@ export class LoginComponent {
   }
 
   public login(): void {
-    let model = new LoginModel();
-    model.email = this.email.value;
-    model.password = this.password.value;
-    this.authService.login(model).subscribe((result) => {
+    let data = new LoginModel();
+    data.email = this.email.value;
+    data.password = this.password.value;
+    this.authService.login(data).subscribe((result) => {
       this.isLoginFailed = !result;
     });
   }

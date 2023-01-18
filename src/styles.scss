@@ -112,4 +112,26 @@ router-outlet {
   grid-column: span var(--body-columns);
 }
 
+.mat-drawer-content.mat-sidenav-content.mobile {
+  overflow: hidden !important;
+
+  .root-container {
+    height: calc(100% - 140px) !important;
+  }
+}
+
+h1 {
+  margin: 10px 0;
+  padding: 0 16px;
+  @include typography.headline-large();
+}
+
+
+
 @import "scss/mat-sidenav";
+@import "scss/mat-navbar";
+@import "scss/mat-toolbar";
+@import "scss/mat-list";
+@import "scss/form";
+@import "scss/mat-dialog";
+@import "scss/mat-menu";

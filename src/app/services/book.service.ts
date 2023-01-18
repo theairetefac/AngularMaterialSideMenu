@@ -1,115 +1,68 @@
-import {Injectable} from '@angular/core';
-import {IBook} from "../interfaces/book";
-import {Observable, of} from "rxjs";
+import { Injectable } from '@angular/core';
+import { IBook } from "../interfaces/book";
+import { Observable, of, tap } from "rxjs";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/enironments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
 
-  private _currentId: number;
-
-  //TODO: Заполнить книгами
-  private _books: IBook[] = [
-    {
-      id: 1,
-      name: 'Дюна',
-      author: {
-        firstName: 'Френк',
-        lastName: 'Герберт'
-      }
-    },
-    {
-      id: 2,
-      name: 'Мастер и Маргарита',
-      author: {
-        firstName: 'Михаил',
-        lastName: 'Булгаков'
-      }
-    },
-    {
-      id: 3,
-      name: 'Анна Каренина',
-      author: {
-        firstName: 'Лев',
-        lastName: 'Толстой'
-      }
-    },
-    {
-      id: 4,
-      name: 'Лолита',
-      author: {
-        firstName: 'Владимир',
-        lastName: 'Набоков'
-      }
-    },
-    {
-      id: 5,
-      name: 'Идиот',
-      author: {
-        firstName: 'Фёдор',
-        lastName: 'Достоевский'
-      }
-    },
-    {
-      id: 6,
-      name: 'Отцы и дети',
-      author: {
-        firstName: 'Иван',
-        lastName: 'Тургенев'
-      }
-    },
-    {
-      id: 7,
-      name: 'Мёртвые души',
-      author: {
-        firstName: 'Николай',
-        lastName: 'Гоголь'
-      }
-    },
-    {
-      id: 8,
-      name: '1984',
-      author: {
-        firstName: 'Джордж',
-        lastName: 'Оруэлл'
-      }
-    },
-    {
-      id: 9,
-      name: 'О дивный новый мир',
-      author: {
-        firstName: 'Олдос',
-        lastName: 'Хаксли'
-      }
-    },
-  ];
-
-  constructor() {
-    this._currentId = Math.max(...this._books.map(b => b.id));
-  }
-
-  public getList(): Observable<IBook[]> {
+  private _books: IBook[] = [];
+  public get Books(): Observable<IBook[]> {
     return of(this._books);
   }
 
-  public addBook(book: IBook): Observable<any> {
-    this._currentId++;
-    book.id = this._currentId;
-    this._books.push(book);
-    return of();
+  constructor(private httpClient: HttpClient) {
+    this.getBooks().subscribe(b => this._books = b)
   }
 
-  public editBook(book: IBook): Observable<any> {
-    const index = this._books.findIndex(b => b.id == book.id);
-    if (index != -1) {
-      this._books[index] = book;
-    }
-    return of();
-  }
+  public getBooks = (): Observable<any> =>
+    this.httpClient.get<IBook[]>(environment.apiUrl + 'books', {})
 
-  public deleteBook(book: IBook): Observable<any> {
-    this._books = this._books.filter(b => b.id != book.id)
-    return of();
-  }
+  public generateBooks = (count: number): Observable<any> =>
+    this.httpClient.post<IBook[]>(environment.apiUrl + `books/generate/${count}`, {})
+      .pipe(
+        tap({
+          complete: (() => this.getBooks().subscribe(b => this._books = b))
+        })
+      )
+
+  public deleteBooks = (): Observable<any> =>
+    this.httpClient.delete<IBook[]>(environment.apiUrl + 'books', {})
+      .pipe(
+        tap({
+          complete: (() => this.getBooks().subscribe(b => this._books = b))
+        })
+      )
+
+  public addBook = (book: IBook): Observable<any> =>
+    this.httpClient.post<IBook[]>(environment.apiUrl + 'books', {name: book.name, author: book.author}, {
+      headers: new HttpHeaders({ ['Content-Type']: 'application/json' })
+    })
+      .pipe(
+        tap({
+          complete: (() => this.getBooks().subscribe(b => this._books = b))
+        })
+      )
+
+  public editBook = (book: IBook): Observable<any> =>
+    this.httpClient.put<IBook[]>(environment.apiUrl + `books/${book.id}`, { name: book.name, author: book.author }, {
+      headers: new HttpHeaders({ ['Content-Type']: 'application/json' })
+    })
+      .pipe(
+        tap({
+          complete: (() => this.getBooks().subscribe(b => this._books = b))
+        })
+      )
+
+  public deleteBook = (book: IBook): Observable<any> =>
+    this.httpClient.delete<IBook[]>(environment.apiUrl + `books/${book.id}`, {})
+      .pipe(
+        tap({
+          complete: (() => this.getBooks().subscribe(b => this._books = b))
+        })
+      )
+
 }

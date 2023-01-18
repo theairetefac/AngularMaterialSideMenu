@@ -1,5 +1,5 @@
-import {IBook} from './book';
-import {DialogActionType} from '../models/dialog-action-type'
+import { IBook } from './book';
+import { DialogActionType } from '../models/dialog-action-type'
 
 export interface IBookDialogData {
   book?: IBook,

@@ -21,6 +21,7 @@
     <mat-error *ngIf="isLoginFailed">Something went wrong</mat-error>
   </form>
 
-  <button mat-raised-button color="primary" (click)="login()" [disabled]="loginForm.invalid">Login</button>
+  <a mat-button routerLink="/auth/register">Sign Up</a>
+  <button mat-raised-button (click)="login()" [disabled]="loginForm.invalid">Login</button>
 
 </div>

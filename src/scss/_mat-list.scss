@@ -1,0 +1,70 @@
+.list.books {
+    margin: 40px 0;
+    display: grid;
+    grid-template-columns: repeat(var(--body-columns), 1fr);
+    grid-column-gap: var(--body-gutters);
+
+    @container (min-width: 632px) {
+        --body-columns: 12;
+        --body-gutters: 12px;
+    }
+
+    @container (min-width: 904px) {
+        --body-margins: auto;
+    }
+
+    @container (min-width: 1240px) {
+        --body-margins: 200px;
+        --body-grow: 1;
+        --body-gutters: 32px;
+    }
+
+    .element {
+        grid-column: span 4;
+
+        @container (min-width: 632px) and (max-width: 900px) {
+            grid-column: span 6 !important;
+        }
+
+        padding: 8px 24px 8px 16px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+
+        .text {
+            flex: 1 0;
+
+            .headline {
+                font-weight: 500;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                @include typography.body-large();
+
+                width: 10ch;
+
+                @container (min-width: 400px) {
+                    width: 18ch !important;
+                }
+            }
+
+            .supporting-text {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                color: colors.on-surface-variant();
+                @include typography.body-medium();
+
+                width: 10ch;
+
+                @container (min-width: 400px) {
+                    width: 18ch !important;
+                }
+            }
+        }
+
+        &>button {
+            flex: 0 0 24px;
+        }
+    }
+}

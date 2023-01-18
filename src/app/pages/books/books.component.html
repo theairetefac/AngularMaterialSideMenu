@@ -1,10 +1,10 @@
-<h1 class="mat-headline-large">Книги</h1>
+<h1>Книги</h1>
 
 <div class="list books">
-  <div class="element" *ngFor="let book of bookService.getList() | async">
+  <div class="element" *ngFor="let book of bookService.Books | async">
     <div class="text">
-      <div class="headline mat-body-large">{{ book.name }}</div>
-      <div class="supporting-text mat-body-medium">{{ book.author | author }}</div>
+      <div class="headline">{{ book.name }}</div>
+      <div class="supporting-text">{{ book.author }}</div>
     </div>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
@@ -14,7 +14,6 @@
         <mat-icon>edit</mat-icon>
         <span>Редактировать</span>
       </button>
-      <!-- <button mat-menu-item disabled> -->
       <button mat-menu-item (click)="deleteBook(book)">
         <mat-icon>delete</mat-icon>
         <span>Удалить</span>
@@ -23,7 +22,29 @@
   </div>
 </div>
 
-<button mat-raised-button color='primary' (click)="addBook()" class="add-button">
-  Добавить
-  <mat-icon>add</mat-icon>
-</button>
+<div *ngIf="!(responsiveService.isMedium | async)" class="book-actions">
+  <button mat-button (click)="generateBooks()" class="random-button">
+    <mat-icon>shuffle</mat-icon>
+    <span>Добавить случайные книги</span>
+  </button>
+  <button mat-raised-button (click)="addBook()" class="add-button">
+    <mat-icon>add</mat-icon>
+    <span>Добавить книгу</span>
+  </button>
+  <button mat-raised-button (click)="deleteBooks()" class="delete-button">
+    <mat-icon>delete</mat-icon>
+    <span>Удалить все книги</span>
+  </button>
+</div>
+
+<div *ngIf="responsiveService.isMedium | async" class="book-actions">
+  <button mat-icon-button (click)="generateBooks()" class="random-button">
+    <mat-icon>shuffle</mat-icon>
+  </button>
+  <button mat-mini-fab (click)="addBook()" class="add-button">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button mat-mini-fab (click)="deleteBooks()" class="delete-button">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

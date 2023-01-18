@@ -1,0 +1,45 @@
+.nav-bar {
+    padding: 12px 0 16px 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: colors.surface();
+
+    .link {
+        display: flex;
+        flex-direction: column;
+        place-items: center;
+        gap: 4px;
+        text-decoration: none !important;
+
+        .icon {
+            width: 64px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+
+            .mat-icon {
+                color: colors.on-surface-variant();
+            }
+        }
+
+        .label {
+            color: colors.on-surface-variant();
+        }
+
+        &.active {
+            .icon {
+                background-color: colors.secondary-container();
+
+                .mat-icon {
+                    color: colors.on-secondary-container();
+                    fill: currentColor;
+                }
+            }
+
+            .label {
+                color: colors.on-surface();
+            }
+        }
+    }
+}

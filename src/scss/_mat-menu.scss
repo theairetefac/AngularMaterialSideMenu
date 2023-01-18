@@ -1,0 +1,14 @@
+.mat-mdc-menu-panel {
+    background: colors.surface-variant() !important;
+
+    .mat-mdc-menu-content {
+        .mat-mdc-menu-item {
+            .mat-icon {
+                color: colors.on-surface-variant() !important;
+            }
+            .mdc-list-item__primary-text {
+                color: colors.on-surface-variant() !important;
+            }
+        }
+    }
+}

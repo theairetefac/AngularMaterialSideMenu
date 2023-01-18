@@ -4,6 +4,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { BookDialogComponent } from "./dialogs/book-dialog/book-dialog.component";
 import { IBook } from "../../interfaces/book";
 import { DialogActionType } from '../../models/dialog-action-type';
+import {ResponsiveService} from "../../services/responsive.service";
 
 @Component({
   selector: 'app-books',
@@ -15,15 +16,21 @@ export class BooksComponent {
 
   constructor(
     public bookService: BookService,
-    private dialog: MatDialog
-  ) {
+    public responsiveService: ResponsiveService,
+    private dialog: MatDialog,
+  ) { }
+
+  public generateBooks() {
+    this.bookService.generateBooks(10).subscribe();
+  }
+
+  public deleteBooks() {
+    this.bookService.deleteBooks().subscribe();
   }
 
   public addBook() {
     const dialogRef = this.dialog.open(BookDialogComponent, {
-      data: {
-        action: DialogActionType.ADD
-      }
+      data: { action: DialogActionType.ADD }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -35,10 +42,7 @@ export class BooksComponent {
 
   public editBook(book: IBook) {
     const dialogRef = this.dialog.open(BookDialogComponent, {
-      data: {
-        book,
-        action: DialogActionType.EDIT
-      },
+      data: { book, action: DialogActionType.EDIT }
     });
 
     dialogRef.afterClosed().subscribe(result => {

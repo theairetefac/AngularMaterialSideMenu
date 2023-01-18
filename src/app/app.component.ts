@@ -1,16 +1,8 @@
 import { Component } from '@angular/core';
 import { MatIconRegistry } from "@angular/material/icon";
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
 import { onMainContentChange, onSideNavChange } from './animations';
-import {AuthService} from "./auth/auth.service";
-
-interface IMenuLink {
-  link: string;
-  name: string;
-  icon: string;
-}
+import { AuthService } from "./auth/auth.service";
+import { ResponsiveService } from "./services/responsive.service";
 
 @Component({
   selector: 'app-root',
@@ -21,37 +13,18 @@ interface IMenuLink {
 export class AppComponent {
 
   public isMenuOpened: boolean = false;
-  public isTextVisible: boolean = false;
-  public pages: Array<IMenuLink> = [
-    { name: 'Главная', link: '', icon: 'home' },
-    { name: 'Страница 2', link: 'page-2', icon: 'inbox' },
-    { name: 'Страница 3', link: 'page-3', icon: 'star' },
-    { name: 'Страница 4', link: 'page-4', icon: 'send' },
-    { name: 'Книги', link: 'books', icon: 'book' },
-  ]
-  public isHandset: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
 
-    
-  constructor( private matIconRegistry: MatIconRegistry, private breakpointObserver: BreakpointObserver, public authService: AuthService  ) {
+  constructor(
+    private matIconRegistry: MatIconRegistry,
+    public authService: AuthService,
+    public responsiveService: ResponsiveService) {
     this.matIconRegistry.setDefaultFontSetClass('material-symbols-rounded');
-    
-    this.isHandset.subscribe(isHandset => {
+    responsiveService.isHandset.subscribe(isHandset => {
       this.isMenuOpened = !isHandset;
-
-      setTimeout(() => {
-        this.isTextVisible = this.isMenuOpened;
-      }, 200)
     });
   }
+
   public toggleSidenav() {
     this.isMenuOpened = !this.isMenuOpened;
-
-    setTimeout(() => {
-      this.isTextVisible = this.isMenuOpened;
-    }, 200)
   }
 }

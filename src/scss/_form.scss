@@ -1,0 +1,45 @@
+app-register {
+    a.mat-mdc-button {
+        color: colors.on-surface() !important;
+    }
+    button.mdc-button:disabled {
+        background: colors.surface-variant() !important;
+        color: colors.on-surface-variant() !important;
+    }
+    button.mdc-button:not(:disabled) {
+        background: colors.primary() !important;
+        color: colors.on-primary() !important;
+    }
+}
+
+app-login {
+    a.mat-mdc-button {
+        color: colors.on-surface() !important;
+    }
+    button.mdc-button:disabled {
+        background: colors.surface-variant() !important;
+        color: colors.on-surface-variant() !important;
+    }
+    button.mdc-button:not(:disabled) {
+        background: colors.primary() !important;
+        color: colors.on-primary() !important;
+    }
+}
+
+app-books {
+    .book-actions {
+        button {
+            &.random-button {
+                color: colors.on-surface();
+            }
+            &.add-button {
+                background: colors.primary();
+                color: colors.on-primary();
+            }
+            &.delete-button {
+                background: colors.error();
+                color: colors.on-error();
+            }
+        }
+    }
+}

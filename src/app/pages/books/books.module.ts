@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { BooksRoutingModule } from './books-routing.module';
 import { BooksComponent } from './books.component';
-import { PipesModule } from "../../pipes/pipes.module";
 import { MatButtonModule } from "@angular/material/button";
 import { BookDialogComponent } from './dialogs/book-dialog/book-dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
@@ -23,7 +22,6 @@ import { MatMenuModule } from '@angular/material/menu';
   imports: [
     CommonModule,
     BooksRoutingModule,
-    PipesModule,
     MatButtonModule,
     MatDialogModule,
     ReactiveFormsModule,
